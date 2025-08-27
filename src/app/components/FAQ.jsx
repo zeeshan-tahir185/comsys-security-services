@@ -33,7 +33,7 @@ export default function FAQ() {
         <Accordion type="single" collapsible className="w-full space-y-4">
           {faqs.map((faq, index) => (
              <AccordionItem key={index} value={`item-${index}`} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-              <AccordionTrigger className="text-lg font-semibold text-left text-[#3A4E62] hover:no-underline">
+              <AccordionTrigger className="text-lg cursor-pointer font-semibold text-left text-[#3A4E62] hover:no-underline">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-base text-[#3A4E62]/80 pt-4">
