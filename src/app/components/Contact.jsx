@@ -26,31 +26,42 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // try {
-    //   const { data, error } = await contactForm({
-    //     name: formData.name,
-    //     email: formData.email,
-    //     phone: formData.phone,
-    //     company: formData.company, // Pass company field
-    //     message: formData.message
-    //   });
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    //   if (data?.success) {
-    //     toast({ title: "Message Sent!", description: "Thank you for your inquiry! We'll get back to you soon.", variant: "default" });
-    //     setFormData({ name: '', company: '', email: '', phone: '', message: '' });
-    //   } else {
-    //     throw new Error(error?.message || 'Failed to send message.');
-    //   }
-    // } catch (error) {
-    //   toast({ title: "Submission Failed", description: error.message || "Please try again or contact us directly.", variant: "destructive" });
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
-  };
+  try {
+    const response = await fetch('/api/sendEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      toast({
+        title: 'Message Sent!',
+        description: 'Thank you for your inquiry! We\'ll get back to you soon.',
+        variant: 'default',
+      });
+      setFormData({ name: '', company: '', email: '', phone: '', message: '' });
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    toast({
+      title: 'Submission Failed',
+      description: error.message || 'Please try again or contact us directly.',
+      variant: 'destructive',
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   return (
     <section id="contact" className="py-24 bg-white">
