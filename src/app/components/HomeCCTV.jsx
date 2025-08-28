@@ -52,7 +52,7 @@ export default function HomeCCTV() {
             className="relative"
           >
             <img
-              src="https://images.unsplash.com/photo-1619994129570-5b9f563e5218?q=80&w=800&auto=format&fit=crop"
+              src="/images/img1.png"
               alt="Home CCTV Security System in Auckland"
               className="rounded-3xl shadow-2xl w-full h-auto object-cover"
             />
